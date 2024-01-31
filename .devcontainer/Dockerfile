@@ -1,24 +1,24 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-buster
+FROM ubuntu:latest
 
-# Instala dependencias
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends \
-    wget \
-    gnupg \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+# Instala ambiente (OS)
+RUN apt-get update && \
+    apt-get install -y curl git unzip xz-utils libglu1-mesa openjdk-11-jdk
 
 # Instala Chrome
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
-    && apt-get update && apt-get -y install google-chrome-stable
+RUN apt-get install -y wget gnupg && \
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && apt-get install -y google-chrome-stable
 
-# Instala Flutter
-RUN git clone https://github.com/flutter/flutter.git /flutter
+# Instala Flutter y Dart
+RUN git clone https://github.com/flutter/flutter.git /flutter && \
+    /flutter/bin/flutter --version
+
 ENV PATH="/flutter/bin:${PATH}"
 
-# Configura Flutter
-RUN flutter config --no-analytics && flutter precache && flutter doctor --android-licenses
+# Configura el SDK de Flutter
+RUN flutter config --no-analytics && \
+    flutter precache && \
+    flutter doctor --android-licenses
 
-# Configura el entorno
-ENV DISPLAY=:99
+WORKDIR /workspace
