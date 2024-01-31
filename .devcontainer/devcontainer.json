@@ -1,5 +1,5 @@
 {
-  "name": "Flutter Dev Container",
+  "name": "flutter devcontainer",
   "dockerFile": "Dockerfile",
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash"
