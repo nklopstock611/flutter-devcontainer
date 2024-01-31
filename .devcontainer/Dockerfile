@@ -22,13 +22,3 @@ RUN flutter config --no-analytics && \
     flutter doctor --android-licenses
 
 WORKDIR /workspace
-
-# Copia el script de inicio y dale permisos de ejecución
-COPY start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
-
-# Configura el SDK de Flutter en el script de inicio
-RUN echo "flutter config --no-analytics && flutter precache && flutter doctor --android-licenses" >> /usr/local/bin/start.sh
-
-# Establece el script de inicio como el comando predeterminado para el contenedor
-CMD ["/usr/local/bin/start.sh"]
