@@ -10,10 +10,11 @@ RUN apt-get install -y wget gnupg && \
     echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list && \
     apt-get update && apt-get install -y google-chrome-stable
 
-# Instala Flutter y Dart
-RUN git clone https://github.com/flutter/flutter.git /flutter && \
-    /flutter/bin/flutter --version
+# Crea un volumen llamado 'workspace'
+VOLUME /workspace
 
+# Instala Flutter
+RUN git clone https://github.com/flutter/flutter.git /flutter
 ENV PATH="/flutter/bin:${PATH}"
 
 # Configura el SDK de Flutter

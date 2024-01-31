@@ -9,6 +9,5 @@
     "dart-code.dart-code"
   ],
   "forwardPorts": [8080],
-  "workspaceMount": "source=${localWorkspaceFolder}/.devcontainer/source,target=/workspace",
-  "remoteUser": "vscode"
+  // "workspaceMount": "source=/workspaces/flutter-devcontainer/.devcontainer/devsource,target=/workspace"
 }
