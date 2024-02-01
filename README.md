@@ -1,7 +1,7 @@
 # flutter devcontainer for Codespaces
 
 ```
-cd flutter_application_1
+cd [name of the flutter project]
 flutter pub get
 flutter run -d web-server
 ```
